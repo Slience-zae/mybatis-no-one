@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.perfect.moudle.system.dao.RiskWarnDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.perfect.moudle.system.entity.RiskWarnDetail" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="prod_id" property="prod_id" jdbcType="VARCHAR" />
+    <result column="corp_unno" property="corp_unno" jdbcType="VARCHAR" />
+    <result column="warn_no" property="warn_no" jdbcType="VARCHAR" />
+    <result column="warn_date" property="warn_date" jdbcType="TIMESTAMP" />
+    <result column="warn_event" property="warn_event" jdbcType="VARCHAR" />
+    <result column="warn_result" property="warn_result" jdbcType="INTEGER" />
+    <result column="warn_status" property="warn_status" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="del_flag" property="del_flag" jdbcType="INTEGER" />
+    <result column="create_by" property="create_by" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="update_by" jdbcType="VARCHAR" />
+    <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, prod_id, corp_unno, warn_no, warn_date, warn_event, warn_result, warn_status, 
+    remark, del_flag, create_by, create_time, update_by, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.perfect.moudle.system.entity.RiskWarnDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_scf_risk_warn_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_scf_risk_warn_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_scf_risk_warn_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.perfect.moudle.system.entity.RiskWarnDetailExample" >
+    delete from t_scf_risk_warn_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.perfect.moudle.system.entity.RiskWarnDetail" >
+    insert into t_scf_risk_warn_detail (id, prod_id, corp_unno, 
+      warn_no, warn_date, warn_event, 
+      warn_result, warn_status, remark, 
+      del_flag, create_by, create_time, 
+      update_by, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{prod_id,jdbcType=VARCHAR}, #{corp_unno,jdbcType=VARCHAR}, 
+      #{warn_no,jdbcType=VARCHAR}, #{warn_date,jdbcType=TIMESTAMP}, #{warn_event,jdbcType=VARCHAR}, 
+      #{warn_result,jdbcType=INTEGER}, #{warn_status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{del_flag,jdbcType=INTEGER}, #{create_by,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, 
+      #{update_by,jdbcType=VARCHAR}, #{update_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.perfect.moudle.system.entity.RiskWarnDetail" >
+    insert into t_scf_risk_warn_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="prod_id != null" >
+        prod_id,
+      </if>
+      <if test="corp_unno != null" >
+        corp_unno,
+      </if>
+      <if test="warn_no != null" >
+        warn_no,
+      </if>
+      <if test="warn_date != null" >
+        warn_date,
+      </if>
+      <if test="warn_event != null" >
+        warn_event,
+      </if>
+      <if test="warn_result != null" >
+        warn_result,
+      </if>
+      <if test="warn_status != null" >
+        warn_status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="del_flag != null" >
+        del_flag,
+      </if>
+      <if test="create_by != null" >
+        create_by,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="update_by != null" >
+        update_by,
+      </if>
+      <if test="update_time != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="prod_id != null" >
+        #{prod_id,jdbcType=VARCHAR},
+      </if>
+      <if test="corp_unno != null" >
+        #{corp_unno,jdbcType=VARCHAR},
+      </if>
+      <if test="warn_no != null" >
+        #{warn_no,jdbcType=VARCHAR},
+      </if>
+      <if test="warn_date != null" >
+        #{warn_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warn_event != null" >
+        #{warn_event,jdbcType=VARCHAR},
+      </if>
+      <if test="warn_result != null" >
+        #{warn_result,jdbcType=INTEGER},
+      </if>
+      <if test="warn_status != null" >
+        #{warn_status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="del_flag != null" >
+        #{del_flag,jdbcType=INTEGER},
+      </if>
+      <if test="create_by != null" >
+        #{create_by,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_by != null" >
+        #{update_by,jdbcType=VARCHAR},
+      </if>
+      <if test="update_time != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.perfect.moudle.system.entity.RiskWarnDetailExample" resultType="java.lang.Integer" >
+    select count(*) from t_scf_risk_warn_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_scf_risk_warn_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prod_id != null" >
+        prod_id = #{record.prod_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corp_unno != null" >
+        corp_unno = #{record.corp_unno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warn_no != null" >
+        warn_no = #{record.warn_no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warn_date != null" >
+        warn_date = #{record.warn_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.warn_event != null" >
+        warn_event = #{record.warn_event,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warn_result != null" >
+        warn_result = #{record.warn_result,jdbcType=INTEGER},
+      </if>
+      <if test="record.warn_status != null" >
+        warn_status = #{record.warn_status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.del_flag != null" >
+        del_flag = #{record.del_flag,jdbcType=INTEGER},
+      </if>
+      <if test="record.create_by != null" >
+        create_by = #{record.create_by,jdbcType=VARCHAR},
+      </if>
+      <if test="record.create_time != null" >
+        create_time = #{record.create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.update_by != null" >
+        update_by = #{record.update_by,jdbcType=VARCHAR},
+      </if>
+      <if test="record.update_time != null" >
+        update_time = #{record.update_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_scf_risk_warn_detail
+    set id = #{record.id,jdbcType=VARCHAR},
+      prod_id = #{record.prod_id,jdbcType=VARCHAR},
+      corp_unno = #{record.corp_unno,jdbcType=VARCHAR},
+      warn_no = #{record.warn_no,jdbcType=VARCHAR},
+      warn_date = #{record.warn_date,jdbcType=TIMESTAMP},
+      warn_event = #{record.warn_event,jdbcType=VARCHAR},
+      warn_result = #{record.warn_result,jdbcType=INTEGER},
+      warn_status = #{record.warn_status,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      del_flag = #{record.del_flag,jdbcType=INTEGER},
+      create_by = #{record.create_by,jdbcType=VARCHAR},
+      create_time = #{record.create_time,jdbcType=TIMESTAMP},
+      update_by = #{record.update_by,jdbcType=VARCHAR},
+      update_time = #{record.update_time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.perfect.moudle.system.entity.RiskWarnDetail" >
+    update t_scf_risk_warn_detail
+    <set >
+      <if test="prod_id != null" >
+        prod_id = #{prod_id,jdbcType=VARCHAR},
+      </if>
+      <if test="corp_unno != null" >
+        corp_unno = #{corp_unno,jdbcType=VARCHAR},
+      </if>
+      <if test="warn_no != null" >
+        warn_no = #{warn_no,jdbcType=VARCHAR},
+      </if>
+      <if test="warn_date != null" >
+        warn_date = #{warn_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warn_event != null" >
+        warn_event = #{warn_event,jdbcType=VARCHAR},
+      </if>
+      <if test="warn_result != null" >
+        warn_result = #{warn_result,jdbcType=INTEGER},
+      </if>
+      <if test="warn_status != null" >
+        warn_status = #{warn_status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="del_flag != null" >
+        del_flag = #{del_flag,jdbcType=INTEGER},
+      </if>
+      <if test="create_by != null" >
+        create_by = #{create_by,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_by != null" >
+        update_by = #{update_by,jdbcType=VARCHAR},
+      </if>
+      <if test="update_time != null" >
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.perfect.moudle.system.entity.RiskWarnDetail" >
+    update t_scf_risk_warn_detail
+    set prod_id = #{prod_id,jdbcType=VARCHAR},
+      corp_unno = #{corp_unno,jdbcType=VARCHAR},
+      warn_no = #{warn_no,jdbcType=VARCHAR},
+      warn_date = #{warn_date,jdbcType=TIMESTAMP},
+      warn_event = #{warn_event,jdbcType=VARCHAR},
+      warn_result = #{warn_result,jdbcType=INTEGER},
+      warn_status = #{warn_status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      del_flag = #{del_flag,jdbcType=INTEGER},
+      create_by = #{create_by,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_by = #{update_by,jdbcType=VARCHAR},
+      update_time = #{update_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
